@@ -8,11 +8,12 @@
 </head>
 <body>
     <script type="module">
-        import init, { greet } from './pkg/hello_wasm.js'
+        import init, { greet, MYexec } from './pkg/hello_wasm.js'
 
         await init()
 
-        console.log(greet('Talles'))
+        //console.log(greet('Talles'))
+        MYexec()
     </script>
 </body>
 </html>
