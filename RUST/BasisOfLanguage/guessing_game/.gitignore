@@ -1,11 +1,5 @@
-*.exe
-*/target
-*/pkg
-*/pkg/
-*/target/
-*/pkg/*
-*/target/*
 /Cargo.lock
+Cargo.lock
 /target
 */target
 */target/
