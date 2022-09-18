@@ -1,0 +1,25 @@
+<button id="mybtn"> CLICK HERE AND SEE THE MAGIC </button>
+
+<script type='text/javascript'>
+
+    // const cprint = Module.cwrap('printName', null, ['string'])
+    // document.getElementById('mybtn').addEventListener( 'click', () => {
+    //     cprint('Talles')
+    // })
+
+    document.getElementById("mybtn").addEventListener("click", () => {
+    const result = Module.ccall(
+        'printName', // name of C function
+        null,   // return type
+        ['string'],   // argument types
+        ['Talles']    // arguments
+    );})
+
+    
+
+    Module.onRuntimeInitilized = async () => {
+        const api = {
+            version: Module.cwrap('printName', null, ['string']),
+        }
+        api.printName('TAlles')
+    }
