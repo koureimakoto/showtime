@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script type="module">
+
+        /*
+         * Alloc new Linear Wasm Memory
+         */
+        const memory = new WebAssembly.Memory( {
+            initial: 10, // Init. size * 64KB
+            maximum: 100 // Max   size * 64KB
+        } )
+
+        const memoryHash = new Array(10)
+
+        /*
+         * Function to save ASCII String in the memory 
+         */
+        function saveStringMemory( mem, memPos, arr ) {
+            let i
+            for ( i = 0 ; i < arr.length ; i++ ) {
+                new Uint8Array(mem.buffer)[ memPos + i ] = arr[i].charCodeAt(0) 
+            }
+            // Add \n to indicate end of string
+            mem[ memPos + i ]
+
+            return { init: memPos, len: arr.length }
+        }
+
+        /*
+         * Decode the ASCII String saved in memory
+         */
+        function wasmASCIIStringDecode( mem, obj ) {
+            let index
+            let bufferString = ''
+            let bufferLetter = ''
+            for (index = 0; index < obj.len; index++) {
+                bufferLetter = new Uint8Array(mem.buffer)[ obj.init + index ];
+                bufferString += String.fromCharCode( bufferLetter )
+            }
+            return bufferString
+        }
+
+        function wasmStringDecode( mem, obj ) {
+            let index
+            let bufferString = ''
+            let bufferLetter = ''
+            let buffer       = new Uint8Array( mem.buffer )
+            for (index = 0; index < obj.len; index++) {
+                bufferLetter = buffer[ obj.init + index ]
+                bufferString += String.fromCharCode( bufferLetter )
+            }
+            return bufferString 
+        }
+
+        /*
+         * Function to Print ASCII String saved in the memory
+         */        
+        function wasmPrintln( mem, obj ) {
+            console.log(wasmStringDecode( mem, obj ))
+        }
+
+        const myWasmText  = saveStringMemory( memory, 0, 'Oitenta')
+        const myWasmText2 = saveStringMemory( memory, 0, 'Tchau')
+
+        console.log(myWasmText)
+
+        wasmPrintln(memory, myWasmText)
+
+    </script>
+</body>
+</html>
