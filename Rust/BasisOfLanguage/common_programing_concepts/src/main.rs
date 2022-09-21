@@ -68,5 +68,52 @@ main() {
         arr[1]
     );
 
+    myFirstRustFunction( 5 );
+    mySecondRustFunction( 4 );
+
+    // ---
+
+    let expr = {
+        let y = 5;
+        y + 2
+    };
+    println!( "Rust EXPR: {expr}" );
+
+
+    // ---
+    println!( "Rust Functions Concept");
+
+    println!( "No literal return: {}", noLiteralReturn() );
+    println!( "Using Text now: {}", textWithouLiteralReturn());
+
+
+
+    // --
+
+
+    let inj = 2;
+    for number in inj..4 {
+        println!("{number}!");
+    }
+    println!("LIFTOFF!!!");
 }
 
+#[allow(non_snake_case)]
+fn myFirstRustFunction( a: i32 ) {
+    println!( "HelloW {a}" );
+}
+
+#[allow(non_snake_case)]
+fn mySecondRustFunction( a: i32 ) {
+    println!( "HelloW {a}" );
+}
+
+#[allow(non_snake_case)]
+fn noLiteralReturn() -> i32 {
+    5
+}
+
+#[allow(non_snake_case)]
+fn textWithouLiteralReturn() -> String {
+    "Sem memo em!".to_string()
+}
