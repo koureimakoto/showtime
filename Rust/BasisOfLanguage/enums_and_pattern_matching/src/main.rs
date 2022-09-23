@@ -44,36 +44,22 @@ impl IpAddr {
 ---
 Coin Exemple
 */
-
-enum 
-Sul {
-   RS,
-   SC,
-   PR 
-}
-
-enum 
-Region {
-    SC,
-    PR,
-    SP,
-    RJ,
-    ES,
-    MG,
-    MS,
-    MT,
-    GO
-}
-
-
 #[derive(Debug)]
+enum UsState {
+    Alabama,
+    Alaska
+}
+
+
+
 enum 
 Coin {
     Penny,
     Nickel,
     Dime,
-    Quarter,
+    Quarter(UsState),
 }
+
 
 impl Coin {
     fn 
@@ -82,10 +68,24 @@ impl Coin {
             Coin::Penny   =>  1,
             Coin::Nickel  =>  5,
             Coin::Dime    => 10,
-            Coin::Quarter => 25
+            Coin::Quarter(state) => {
+                println!( "State Quarter from {:?}", state);
+                25
+            }
         }
     }
 }
+
+// -- Options<T>
+
+fn 
+plus_one( value: Option<i32> ) -> Option<i32> {
+    match value {
+        Some(n) => Some( n + 1 ),
+        None => None
+    }
+}
+
 
 /*
 
@@ -139,6 +139,13 @@ fn main() {
     println!( "Penny value   :: {}", Coin::Penny.coin()   );
     println!( "Nickel value  :: {}", Coin::Nickel.coin()  );
     println!( "Dime value    :: {}", Coin::Dime.coin()    );
-    println!( "Quarter value :: {}", Coin::Quarter.coin() );
+    println!( "Quarter value :: {}", Coin::Quarter( UsState::Alabama ).coin() );
+
+
+    // -- Options<T>
+
+    let five = Some(5);
+    let six = plus_one(five);
+    let none = plus_one(None);
 
 }
