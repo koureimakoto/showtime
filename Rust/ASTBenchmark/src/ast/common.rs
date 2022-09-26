@@ -1,8 +1,6 @@
-pub struct Token{
-    pub flag: char
-}
+
 
 pub trait 
 CommonLexerFunc {
-    fn find( letter: char ) -> Self;
+    fn from( &mut self, letter: char );
 }

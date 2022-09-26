@@ -1,4 +1,4 @@
-use super::common::{ Token, CommonLexerFunc} ;
+use super::common::{ CommonLexerFunc} ;
 
 pub const UNDEF  : u8 = 0x0;
 
@@ -10,8 +10,19 @@ const LESS_SIMBOL : char = '<';
 const MORE_SIMBOL : char = '>';
 const SLASH_SIMBOL: char = '/';
 
+
+pub struct Token{
+    pub flag: char
+}
+
 impl
 Token {
+
+    pub fn 
+    new( letter: char ) -> Self {
+        Self{ flag: letter}
+    }
+
     pub fn
     less( &self ) -> bool {
         self.flag == LESS_SIMBOL
@@ -33,8 +44,8 @@ impl
 CommonLexerFunc for Token {
 
     fn 
-    find( letter: char ) -> Self {
-        Self{ flag: letter}
+    from( &mut self,  letter: char ) {
+        self.flag = letter
     }
     
 }
