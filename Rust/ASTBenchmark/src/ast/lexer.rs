@@ -3,12 +3,7 @@ use super::{
     common::{CommonLexerFunc}
 };
 
-
-
-
-const EOS: u8 = 0xFF;
-
-
+const EOS: u8 = 0xFF; // End of String
 
 pub struct 
 Engine {
