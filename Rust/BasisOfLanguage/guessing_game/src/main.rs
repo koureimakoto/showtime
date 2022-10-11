@@ -17,15 +17,25 @@ main() {
             .read_line(&mut guess)
             .expect("Failed to read line.");
         
+
+        /*
+        
         let 
-        guess: u32 = (
-            guess
+        guess: u32 = match guess
             .trim()
             .parse() {//.expect( "Please type a  number!" ) match?
                 Ok(num) => num,
                 Err(_)  => continue,
-            }
-        );
+            };
+        
+        
+        */    
+
+        let 
+        guess: u32 = guess
+            .trim()
+            .parse()
+            .expect( "Please type a  number!" );
         
         println!("Your Guessed: {guess}");
         match guess.cmp( &secret_number ) {
