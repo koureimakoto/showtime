@@ -2,7 +2,6 @@
 
 from enum import Enum
 from signal import SIGKILL, raise_signal, signal
-import os
 from typing import Generic, TypeVar
 
 O = TypeVar('O')
@@ -15,6 +14,7 @@ class ResultName(Generic[O, E]):
 
     def mat(self, opt: O | E):
         self.result = opt
+        return self.result
 
 class Sequence(ResultName):
     def __init__(self) -> None:
@@ -37,7 +37,7 @@ class Sequence(ResultName):
             return None
         del self.ls[ self.need_register ]
         self.need_register = 0
-        return self.result.mat(ok = self)
+        return self.result.mat(opt = self)
 
     def add(self, value: str):
         if type(self.result) == str :
@@ -60,3 +60,4 @@ x.register(1010).add('add_some')
 x.register(1010).print()
 
 y = x.register(1010).remove()
+print( x.register(1010).remove() )
