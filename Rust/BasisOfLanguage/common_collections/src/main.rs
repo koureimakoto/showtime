@@ -1,3 +1,5 @@
+use std::ptr;
+
 
 enum Multype {
     Int(i32),
@@ -68,5 +70,47 @@ fn main() {
         _  => println!("Qualquer coisa")
     }
 
+    // ---
+    // Storing UTF8 Encoded Text with String
+
+    let mut s: String = String::new();
+    let data : &str = "Um exemplo de Texto qualquer";
+     
+    let s_ptr = &mut *s;
+    let data_ptr = data.as_ptr();
+    println!("String - new : {:p}", s_ptr);
+    println!("Str ptr   : {:p}", data);
+    println!("Str ptr2  : {:p}", data_ptr);
+
+    let s = data.to_string();
+    let s_ptr2 = s.as_ptr();
+    println!("String    - new : {}", s);
+    println!("String ptr- new : {:p}", s_ptr2);
+
+
+    let s = data.to_string();
+
+    let mut hello = String::from("السلام عليكم");
+    println!("Hello: {}", hello);
+    let hello = String::from("Dobrý den");
+    println!("Hello: {}", hello);
+    let hello = String::from("Hello");
+    println!("Hello: {}", hello);
+    let hello = String::from("שָׁלוֹם");
+    println!("Hello: {}", hello);
+    let hello = String::from("नमस्ते");
+    println!("Hello: {}", hello);
+    let hello = String::from("こんにちは");
+    println!("Hello: {}", hello);
+    let hello = String::from("안녕하세요");
+    println!("Hello: {}", hello);
+    let hello = String::from("你好");
+    println!("Hello: {}", hello);
+    let hello = String::from("Olá");
+    println!("Hello: {}", hello);
+    let hello = String::from("Здравствуйте");
+    println!("Hello: {}", hello);
+    let hello = String::from("Hola");
+    println!("Hello: {}", hello);
 
 }
