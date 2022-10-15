@@ -1,4 +1,4 @@
-use std::ptr;
+use std::collections::HashMap;
 
 
 enum Multype {
@@ -87,10 +87,7 @@ fn main() {
     println!("String    - new : {}", s);
     println!("String ptr- new : {:p}", s_ptr2);
 
-
-    let s = data.to_string();
-
-    let mut hello = String::from("السلام عليكم");
+    let hello = String::from("السلام عليكم");
     println!("Hello: {}", hello);
     let hello = String::from("Dobrý den");
     println!("Hello: {}", hello);
@@ -112,5 +109,48 @@ fn main() {
     println!("Hello: {}", hello);
     let hello = String::from("Hola");
     println!("Hello: {}", hello);
+
+
+    let s1 = String::from("Começo");
+    let s2 = String::from(" Fim");
+
+    let s3 = "oi".to_string() + &s1 + &s2;
+    println!("Concat {}", s3);
+    println!("Concat {}", s2);
+
+    let mut s4 = String::new();
+    s4.push_str(&s1);
+    s4.push_str(&s2);
+
+    for c in s2.chars() {
+        println!("{:p}", &c);
+    }
+
+    for c in s3.bytes() {
+        println!("{:p}", &c);
+    }
+
+    for i in s4.chars() {
+        println!("{}", &i);
+        // stdout().flush().expect("Error");
+    }
+
+
+    // ---
+    // Storing Key - Hash Map
+    // Maravilha isso, vai ser muito util no compilador
+
+    let mut scores: HashMap<String, u32> = HashMap::new();
+    scores.insert(String::from("Azul")    , 5 );
+    scores.insert(String::from("Vermelho"), 10);
+    println!("{:?}", scores);
+
+    scores.entry(String::from("Azull")).or_insert(40);
+    println!("{:?}", scores);
+
+    scores.insert(String::from("Azull"), 15);
+
+    println!("{:?}", scores);
+
 
 }
