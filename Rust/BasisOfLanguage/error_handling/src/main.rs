@@ -1,5 +1,7 @@
 use std::fs::{File, self};
 use std::io::{self, Read, ErrorKind};
+use std::error::Error;
+use error_handling;
 
 fn read_username_from_file(path: &str) -> Result<String, io::Error> {
     let uname_result = File::open(path);
@@ -36,7 +38,14 @@ fn read_uname_from_file_caralho_que_enxuto(path: &str) -> Result<String, io::Err
     fs::read_to_string(path)
 }
 
-fn main() {
+
+
+fn last_char_of_first_line(txt: &str) -> Option<char> {
+    txt.lines().next()?.chars().last()
+}
+
+
+fn main() -> Result<(), Box<dyn Error>> {
     /*
      * Recoverable Error with Result<T, E>
      */
@@ -84,4 +93,13 @@ fn main() {
      * Where the ? Operator Can Be Used 
      */
 
+     println!("Last Char: {:?}", last_char_of_first_line("Makoto\nWorld"));
+     println!("Last Char: {}", match last_char_of_first_line("Makoto\nWorld") {Some(x) => x, None => '_'} );
+
+     //let hello_file = File::open("nothing_to_open.txt")?;
+
+
+     error_handling::rest::Test.it(5).equal(5);
+
+     Ok(())
 }
