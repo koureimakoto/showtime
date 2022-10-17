@@ -1,8 +1,9 @@
 use std::fs::{File, self};
 use std::io::{self, Read, ErrorKind};
 use std::error::Error;
-use error_handling;
 
+
+    
 fn read_username_from_file(path: &str) -> Result<String, io::Error> {
     let uname_result = File::open(path);
 
@@ -99,7 +100,42 @@ fn main() -> Result<(), Box<dyn Error>> {
      //let hello_file = File::open("nothing_to_open.txt")?;
 
 
-     //error_handling::rest::Test.it(5).equal(5);
+    //  error_handling::rest::Test::new("test").it("Int Equal").expect(5).to_equal(5);
+
 
      Ok(())
+}
+
+#[cfg(test)]
+mod tests {
+    use error_handling::rest::Test;
+
+    
+    #[test]
+    fn rest_lib_test() {
+        Test::title("AST Equality")
+            .it("5 == 5").expect(5).to_equal(5)
+            .it("7 == 7").expect(7).to_equal(7);
+    }
+
+    #[test]
+    fn rest_clean_test() {
+        Test::title("AST Equality Simple")
+            .expect(5).to_equal(5)
+            .expect(7).to_equal(7);
+    }
+
+    #[test]
+    fn rest_string_test() {
+        Test::title("AST String")
+            .expect(String::from("World")).to_cmp(String::from("World"));
+    }
+
+    #[test]
+    fn rust_assert_test() {
+        assert!(5 == 5);
+        assert!(7 == 7);
+    }
+
+
 }
