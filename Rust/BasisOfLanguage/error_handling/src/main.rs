@@ -99,7 +99,7 @@ fn main() -> Result<(), Box<dyn Error>> {
      //let hello_file = File::open("nothing_to_open.txt")?;
 
 
-     error_handling::rest::Test.it(5).equal(5);
+     //error_handling::rest::Test.it(5).equal(5);
 
      Ok(())
 }
