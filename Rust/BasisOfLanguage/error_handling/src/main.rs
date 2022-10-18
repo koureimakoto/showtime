@@ -170,6 +170,7 @@ mod tests {
         it::Expect(lhs).not_equal(rhs);
         it::Expect(lhs_num).to_equal(rhs_num);
         it::Expect(lhs_fl).to_equal(rhs_fl);
+        it::Expect(4 + 4).to_equal(12 - 4);
     }
 
 }
