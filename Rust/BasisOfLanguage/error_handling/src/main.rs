@@ -108,34 +108,68 @@ fn main() -> Result<(), Box<dyn Error>> {
 
 #[cfg(test)]
 mod tests {
-    use error_handling::rest::Test;
+    use error_handling::{rest::it};
 
     
+    // #[test]
+    // fn rest_lib_test() {
+    //     Test::title("AST Equality")
+    //         .it("5 == 5").expect(5).to_equal(5)
+    //         .it("7 == 7").expect(7).to_equal(7);
+    // }
+
+    // #[test]
+    // fn rest_clean_test() {
+    //     Test::title("AST Equality Simple")
+    //         .expect(5).to_equal(5)
+    //         .expect(7).not_equal(8);
+    // }
+
+    // #[test]
+    // fn rest_string_test() {
+    //     Test::title("AST String")
+    //         .expect(String::from("World")).not_equal_str(String::from("Worlds"))
+    //         .expect(String::from("World")).to_equal_str(String::from( "World"));
+    // }
+
+    // #[test]
+    // fn rust_assert_test() {
+    //     assert!(5 == 5);
+    //     assert!(7 == 7);
+    // }
+
+    /**
+     * A implementação Padrão 
+     */
     #[test]
-    fn rest_lib_test() {
-        Test::title("AST Equality")
-            .it("5 == 5").expect(5).to_equal(5)
-            .it("7 == 7").expect(7).to_equal(7);
+    fn string_test() {
+        let lhs : String = String::from("Talles");
+        let rhs : String = String::from("Kourei");
+
+        // Os testes 
+        assert_eq!("Talles", "Talles");
+        assert_ne!(lhs, rhs);
     }
 
+    /**
+     * A cópia do Jest
+     */
     #[test]
-    fn rest_clean_test() {
-        Test::title("AST Equality Simple")
-            .expect(5).to_equal(5)
-            .expect(7).to_equal(7);
-    }
+    fn last_test(){
+        let lhs : String = String::from("Talles");
+        let rhs : String = String::from("Kourei");
 
-    #[test]
-    fn rest_string_test() {
-        Test::title("AST String")
-            .expect(String::from("World")).to_cmp(String::from("World"));
-    }
+        let lhs_num : u64 = 500;
+        let rhs_num : u64 = 500;
 
-    #[test]
-    fn rust_assert_test() {
-        assert!(5 == 5);
-        assert!(7 == 7);
-    }
+        let lhs_fl : f32 = f32::MAX;
+        let rhs_fl : f32 = f32::MAX;
 
+        // Os testes
+        it::Expect("Talles").to_equal("Talles");
+        it::Expect(lhs).not_equal(rhs);
+        it::Expect(lhs_num).to_equal(rhs_num);
+        it::Expect(lhs_fl).to_equal(rhs_fl);
+    }
 
 }

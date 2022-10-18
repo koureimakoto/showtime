@@ -1,6 +1,4 @@
 pub mod rest {
-    use std::io::{self, Read, ErrorKind};
-    use std::fmt::{self, Error};
     use std::fmt::Debug;
 
 
@@ -40,29 +38,22 @@ pub mod rest {
         }
 
         pub fn
-        to_cmp(&self, other: T) -> Test where T: PartialEq {
+        to_equal_str(&self, other: T) -> Test where T: PartialEq {
             assert!(self.eq(other));
             self.new_test()
         }
 
-        // pub fn
-        // cmp_str(&self, other: T) -> Test where T: PartialEq{
-        //     assert_eq!(format!("{:?}", self.to_analisy), self,other);
-        //     self.new_test()
-        // }
-
+        pub fn
+        not_equal_str(&self, other: T) -> Test where T: PartialEq {
+            assert!(self.ne(other));
+            self.new_test()
+        }
 
     }
     
     
     pub fn type_n<T>(_: &T) -> &str {
         std::any::type_name::<T>()
-    }
-
-    impl<T> AsRef<T> for TestThis<String> {
-        fn as_ref(&self) -> &T {
-            self.as_ref()
-        }
     }
 
 
@@ -84,17 +75,13 @@ pub mod rest {
 
     // }
 
-    impl<T: Debug> TestThis<T> {
-        fn fmt(&self, f: &mut fmt::Formatter<'_>) -> Result<(), Error> {
-            f.debug_struct("Result")
-             .field("To Analisy", &self.to_analisy)
-             .finish()
-        }
-
-        // fn fmt(&self) -> String {
-        //     format!("{:?}", self)
-        // }
-    }
+    // impl<T: Debug> TestThis<T> {
+    //     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> Result<(), Error> {
+    //         f.debug_struct("Result")
+    //          .field("To Analisy", &self.to_analisy)
+    //          .finish()
+    //     }
+    // }
 
 
 
@@ -128,7 +115,68 @@ pub mod rest {
         }
  
     }
+   
+    pub mod it {
+        #[derive(Debug, PartialEq, Copy, Clone)]
+        pub struct Expect<T>(pub T);
     
+        impl Expect<&str> {
+            pub fn to_equal(&self, rhs: &str) {
+                let int_right: &Expect<&str> = &Expect(rhs);
+                assert_eq!( self, int_right)
+            }
+        }
+
+        impl Expect<String> {
+            pub fn to_equal(self, rhs: String) {
+                let int_right: Expect<String> = Expect(rhs);
+                assert_eq!( self, int_right)
+            }
+
+            pub fn not_equal(self, rhs: String) {
+                let int_right: Expect<String> = Expect(rhs);
+                assert_ne!( self, int_right)
+            }
+        }
+
+        impl Expect<u64> {
+            pub fn to_equal(self, rhs: u64) {
+                let int_right: Expect<u64> = Expect(rhs);
+                assert_eq!( self, int_right)
+            }
+
+            pub fn not_equal(self, rhs: u64) {
+                let int_right: Expect<u64> = Expect(rhs);
+                assert_ne!( self, int_right)
+            }
+        }
+
+        impl Expect<f32> {
+            pub fn to_equal(self, rhs: f32) {
+                let int_right: Expect<f32> = Expect(rhs);
+                assert_eq!( self, int_right)
+            }
+
+            pub fn not_equal(self, rhs: f32) {
+                let int_right: Expect<f32> = Expect(rhs);
+                assert_ne!( self, int_right)
+            }
+        }
+
+        impl Expect<f64> {
+            pub fn to_equal(self, rhs: f64) {
+                let int_right: Expect<f64> = Expect(rhs);
+                assert_eq!( self, int_right)
+            }
+
+            pub fn not_equal(self, rhs: f64) {
+                let int_right: Expect<f64> = Expect(rhs);
+                assert_ne!( self, int_right)
+            }
+        }
+
+    }
+
 }
 
 
