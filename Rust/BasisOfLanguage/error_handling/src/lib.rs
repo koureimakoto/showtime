@@ -211,3 +211,56 @@ pub mod rest {
 }
 
 
+
+#[macro_export]
+macro_rules! test_env {
+    ( 
+        
+        $vis:vis fn $test_name:ident () {$body:block}
+        $($i:tt)*
+    ) => {
+        test_env! {
+            $($i)*
+        }
+    };
+}
+
+
+
+
+
+#[macro_export]
+macro_rules! test_env3 {
+    ( 
+        $(#[$outr:meta])* 
+        #[cfg(tests)]
+        mod testing { 
+            $(
+                $(#[$inr:meta])*
+                #[test]
+                fn $test_name:ident ( $args_name:ident : &str )
+                    $body:block
+
+            )*
+            $($t:tt)*
+        }     
+    ) => {
+
+        test_env! {
+            mod testing{
+                $($t)*
+            }
+        }
+    };()=>{};
+}
+
+#[macro_export]
+macro_rules! test_env2 {
+    ($describe:ident { $($i:tt)* } expands to { ($e:tt)*} ) => {
+        use error_handling::{rest::it};
+        #[cfg(test)]
+        pub mod $describe() {
+            expands to { $(e)* }
+        }; () => {};
+    };
+}
