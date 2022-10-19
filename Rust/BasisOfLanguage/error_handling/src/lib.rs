@@ -117,6 +117,23 @@ pub mod rest {
     }
    
     pub mod it {
+        
+        static mut COUNT: u32 = 0;
+
+        fn
+        increse() {
+            unsafe {
+                COUNT += 1
+            }
+        }
+
+        pub fn
+        print_test_data() {
+            unsafe {
+                print!("This test ran {} times :: ", COUNT)
+            }
+        }
+   
         #[derive(Debug, PartialEq, Copy, Clone)]
         pub struct Expect<T>(pub T);
     
@@ -126,6 +143,9 @@ pub mod rest {
                 assert_eq!( self, int_right)
             }
         }
+
+        
+
 
         impl Expect<String> {
             pub fn to_equal(self, rhs: String) {
@@ -137,10 +157,21 @@ pub mod rest {
                 let int_right: Expect<String> = Expect(rhs);
                 assert_ne!( self, int_right)
             }
+
+            pub fn is_empty(self) {
+                let int_rhs: Expect<String> = Expect(String::from(""));
+                assert_eq!(self, int_rhs)
+            }
+
+            pub fn is_not_empty(self) {
+                let int_rhs: Expect<String> = Expect(String::from(""));
+                assert_ne!(self, int_rhs)
+            }
         }
 
         impl Expect<u64> {
             pub fn to_equal(self, rhs: u64) {
+                increse();
                 let int_right: Expect<u64> = Expect(rhs);
                 assert_eq!( self, int_right)
             }

@@ -1,3 +1,4 @@
+use std::any::type_name;
 use std::fs::{File, self};
 use std::io::{self, Read, ErrorKind};
 use std::error::Error;
@@ -102,12 +103,20 @@ fn main() -> Result<(), Box<dyn Error>> {
 
     //  error_handling::rest::Test::new("test").it("Int Equal").expect(5).to_equal(5);
 
+    let f = 55;
+    println!("{}", type_of(f));
 
      Ok(())
 }
 
+fn
+type_of<T>(_: T) -> &'static str {
+    type_name::<T>()
+}
+
+
 #[cfg(test)]
-mod tests {
+mod rest_test_impl {
     use error_handling::{rest::it};
 
     
@@ -141,21 +150,22 @@ mod tests {
     /**
      * A implementação Padrão 
      */
-    #[test]
-    fn string_test() {
-        let lhs : String = String::from("Talles");
-        let rhs : String = String::from("Kourei");
+    // #[test]
+    // fn string_test() {
+    //     let lhs : String = String::from("Talles");
+    //     let rhs : String = String::from("Kourei");
 
-        // Os testes 
-        assert_eq!("Talles", "Talles");
-        assert_ne!(lhs, rhs);
-    }
+    //     // Os testes 
+    //     assert_eq!("Talles", "Talles");
+    //     assert_ne!(lhs, rhs);
+    // }
 
     /**
      * A cópia do Jest
      */
     #[test]
     fn last_test(){
+        
         let lhs : String = String::from("Talles");
         let rhs : String = String::from("Kourei");
 
@@ -171,6 +181,10 @@ mod tests {
         it::Expect(lhs_num).to_equal(rhs_num);
         it::Expect(lhs_fl).to_equal(rhs_fl);
         it::Expect(4 + 4).to_equal(12 - 4);
+        it::Expect(String::from("")).is_empty();
+        it::Expect(String::from("")).is_empty();
+
+        it::print_test_data()
     }
 
 }
