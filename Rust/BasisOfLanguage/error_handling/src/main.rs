@@ -2,7 +2,7 @@ use std::any::type_name;
 use std::fs::{File, self};
 use std::io::{self, Read, ErrorKind};
 use std::error::Error;
-
+use error_handling::test_env;
 
     
 fn read_username_from_file(path: &str) -> Result<String, io::Error> {
@@ -115,6 +115,12 @@ type_of<T>(_: T) -> &'static str {
 }
 
 
+pub struct Tssint {
+    config: String,
+    other: u32
+}
+
+
 #[cfg(test)]
 mod rest_test_impl {
     use error_handling::{rest::it};
@@ -188,3 +194,5 @@ mod rest_test_impl {
     }
 
 }
+
+

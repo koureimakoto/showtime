@@ -1,3 +1,5 @@
+use rest::it::Expect;
+
 pub mod rest {
     use std::fmt::Debug;
 
@@ -212,55 +214,102 @@ pub mod rest {
 
 
 
-#[macro_export]
-macro_rules! test_env {
-    ( 
-        
-        $vis:vis fn $test_name:ident () {$body:block}
-        $($i:tt)*
-    ) => {
-        test_env! {
-            $($i)*
-        }
-    };
-}
+// #[macro_export]
+// macro_rules! test_env {
+//     ( 
+//         #[test]
+//         $vis:vis fn $test_name:ident () $T:tt
+//     ) => {
+//         {
+//                 #[test]
+//                 $vis fn $test_name () {$T}
+//         }
+//     }
+// }
+
+// env test:
+//     /**
+//      * unsafe
+//      */
+//     config:
+//         perfomance: yes
+//         verbose   : yes
+//         complex   : yes
+//         path : 
+//             crate::x,
+//             crate::y,        
+//     --  
+
+
+//     // Netrual Area
+
+
+
+//     // End
+//     /**
+//      * 
+//      * $(#[rust_meta:meta])*
+//      * 
+//     */
+//     it("Test Name"):
+//         /**
+//          * #[test]
+//          * fn test_name() {
+//          */
+//         // Neutral Area
+//         config:
+//             complex: no!
+//             random : yes
+//         -
+
+
+//         Expect(Type::T).fn_assert(Type::T);
+//         Expect(Type::T).fn_assert(Type::T);
+//         Expect(Type::T).fn_assert(Type::T);
+
+//         //End
+//         /**
+//          *  }
+//          */
+
+//     -
+// -
 
 
 
 
+// #[macro_export]
+// macro_rules! test_env3 {
+//     ( 
+//         $(#[$outr:meta])* 
+//         #[cfg(tests)]
+//         mod testing { 
+//             $(
+//                 $(#[$inr:meta])*
+//                 #[test]
+//                 fn $test_name:ident ( $args_name:ident : &str )
+//                     $body:block
 
-#[macro_export]
-macro_rules! test_env3 {
-    ( 
-        $(#[$outr:meta])* 
-        #[cfg(tests)]
-        mod testing { 
-            $(
-                $(#[$inr:meta])*
-                #[test]
-                fn $test_name:ident ( $args_name:ident : &str )
-                    $body:block
+//             )*
+//             $($t:tt)*
+//         }     
+//     ) => {
 
-            )*
-            $($t:tt)*
-        }     
-    ) => {
+//         test_env! {
+//             mod testing{
+//                 $($t)*
+//             }
+//         }
+//     };()=>{};
+// }
 
-        test_env! {
-            mod testing{
-                $($t)*
-            }
-        }
-    };()=>{};
-}
-
-#[macro_export]
-macro_rules! test_env2 {
-    ($describe:ident { $($i:tt)* } expands to { ($e:tt)*} ) => {
-        use error_handling::{rest::it};
-        #[cfg(test)]
-        pub mod $describe() {
-            expands to { $(e)* }
-        }; () => {};
-    };
-}
+// #[macro_export]
+// macro_rules! test_env2 {
+//     ($describe:ident { $($i:tt)* } expands to { ($e:tt)*} ) => {
+//         use error_handling::{rest::it};
+//         #[cfg(test)]
+//         pub mod $describe() {
+//             expands to { $(e)* }
+//         }; () => {};
+//     };
+// }
