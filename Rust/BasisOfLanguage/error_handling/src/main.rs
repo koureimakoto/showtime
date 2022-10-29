@@ -105,7 +105,11 @@ fn main() -> Result<(), Box<dyn Error>> {
     let f = 55;
     println!("{}", type_of(f));
 
-     Ok(())
+
+
+    let greet_file = File::open("Tallveis.txt")?;
+
+    Ok(())
 }
 
 fn
