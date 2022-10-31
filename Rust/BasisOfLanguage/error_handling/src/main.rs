@@ -124,50 +124,6 @@ type_of<T>(_: T) -> &'static str {
 mod rest_test_impl {
     use error_handling::{rest::it};
 
-    
-    // #[test]
-    // fn rest_lib_test() {
-    //     Test::title("AST Equality")
-    //         .it("5 == 5").expect(5).to_equal(5)
-    //         .it("7 == 7").expect(7).to_equal(7);
-    // }
-
-    // #[test]
-    // fn rest_clean_test() {
-    //     Test::title("AST Equality Simple")
-    //         .expect(5).to_equal(5)
-    //         .expect(7).not_equal(8);
-    // }
-
-    // #[test]
-    // fn rest_string_test() {
-    //     Test::title("AST String")
-    //         .expect(String::from("World")).not_equal_str(String::from("Worlds"))
-    //         .expect(String::from("World")).to_equal_str(String::from( "World"));
-    // }
-
-    // #[test]
-    // fn rust_assert_test() {
-    //     assert!(5 == 5);
-    //     assert!(7 == 7);
-    // }
-
-    /**
-     * A implementação Padrão 
-     */
-    // #[test]
-    // fn string_test() {
-    //     let lhs : String = String::from("Talles");
-    //     let rhs : String = String::from("Kourei");
-
-    //     // Os testes 
-    //     assert_eq!("Talles", "Talles");
-    //     assert_ne!(lhs, rhs);
-    // }
-
-    /**
-     * A cópia do Jest
-     */
     #[test]
     fn last_test(){
         
