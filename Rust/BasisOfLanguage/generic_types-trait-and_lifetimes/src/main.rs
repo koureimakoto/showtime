@@ -54,12 +54,30 @@ Point<X1, Y1> {
     }
 }
 
+
+enum 
+Options_i32 {
+    Some(i32),
+    None
+}
+
+enum 
+Options_f64 {
+    Some(f64),
+    None
+}
+
+
 fn
 main() {
     // Studying generic types
-    let p1 = Point { x:10, y:10.4};
+    let p1   = Point { x:10, y:10.4};
     let p2 = Point { x:"Makoto", y:'W'};
-    let p3 = p1.mixup(p2);
+    let p3  = p1.mixup(p2);
 
     println!("Legal -> p3.X = {}, p3.Y = {}", p3.x, p3.y);
+
+let integer: Options_i32 = Options_i32::Some(5);
+let float  : Options_f64 = Options_f64::Some(0.5);
+
 }
