@@ -1,3 +1,5 @@
+use generic_types_trait_and_lifetimes::aggregator::{Summary, Tweet, NewsArticle, notify};
+// use generic_types_trait_and_lifetimes::strager_thinks::{Pa}
 
 /* Without Generic */
 fn 
@@ -70,14 +72,54 @@ Options_f64 {
 
 fn
 main() {
-    // Studying generic types
+    
+    /*
+     * Generic Data Types
+     */
     let p1   = Point { x:10, y:10.4};
     let p2 = Point { x:"Makoto", y:'W'};
     let p3  = p1.mixup(p2);
 
     println!("Legal -> p3.X = {}, p3.Y = {}", p3.x, p3.y);
 
-let integer: Options_i32 = Options_i32::Some(5);
-let float  : Options_f64 = Options_f64::Some(0.5);
+    let integer: Options_i32 = Options_i32::Some(5);
+    let float  : Options_f64 = Options_f64::Some(0.5);
+
+
+    /*
+     * Traits: Defining Shared Behavior
+     */
+
+
+    let tweet: Tweet = Tweet {
+        uname  : String::from("horse_ebooks"),
+        content: String::from("Falo nada manolo, essi bagulho eh loKo"),
+        reply  : false,
+        retweet: false
+    };
+
+    println!("1 new tweet: {}", tweet.summarize());
+
+
+    let article: NewsArticle = NewsArticle {
+        headline: String::from("Ahhh, mano, pinguizada muito loKa"),
+        location: String::from("Pittsburger, Pará, Usa ma*"),
+        author  : String::from("Iceburger"),
+        content : String::from("Falou de que ganharam no Rock do gelu")
+    };
+
+    println!("New articune available! {}", article.summarize());
+
+    notify(&tweet  );
+    notify(&article);
+
+    /*
+     * Trait as Parameters
+     */
+
+
+
+
+
 
 }
