@@ -1,5 +1,5 @@
 use generic_types_trait_and_lifetimes::aggregator::{Summary, Tweet, NewsArticle, notify};
-use generic_types_trait_and_lifetimes::refer;
+use generic_types_trait_and_lifetimes::refer::{self, longest};
 // use generic_types_trait_and_lifetimes::strager_thinks::{Pa}
 
 /* Without Generic */
@@ -138,7 +138,23 @@ main() {
     let s1 = String::from("abcd");
     let s2 = "xyz";
 
-   
+    println!("longest: {}", refer::longest(&s1, s2));
+    println!("{}", s1);
+    println!("{}", s2);
+
+    {
+        let s3 = "ghjuio";
+        let result = longest(&s1, s3);
+        println!("'b: {}", result); 
+    }
+
+    let outer_result;
+    {
+        let s3 = "ghjuio";
+        outer_result = longest(&s1, s3);
+        println!("'b: {}", outer_result); 
+    }
+    println!("'a: {}", outer_result); 
 
 }
 
