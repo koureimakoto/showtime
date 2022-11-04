@@ -1,4 +1,5 @@
 use generic_types_trait_and_lifetimes::aggregator::{Summary, Tweet, NewsArticle, notify};
+use generic_types_trait_and_lifetimes::refer;
 // use generic_types_trait_and_lifetimes::strager_thinks::{Pa}
 
 /* Without Generic */
@@ -118,8 +119,26 @@ main() {
      */
 
 
+    // Valid referneces with lifetime
+    // let r;
+
+    // {
+    //     let x = 5;
+    //     r = &x;
+    // }
+
+    // println!("r : {} ??", r);
 
 
+    let x = 5;
+    let r = &x;
+    println!("r : {} ??", r);
 
+
+    let s1 = String::from("abcd");
+    let s2 = "xyz";
+
+   
 
 }
+
