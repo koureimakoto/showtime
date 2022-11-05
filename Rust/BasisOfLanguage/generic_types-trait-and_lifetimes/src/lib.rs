@@ -151,6 +151,28 @@ pub mod refer {
         }          y
     }
 
-    
+    // pub fn
+    // longest_2<'a, 'b>(s: &) {
+        
+    // }
+
+
+    pub struct
+    ImportantExcerpt<'a>{  
+        pub part: &'a str
+    }
+
+    pub fn
+    first_word(s: &str) -> &str {
+        let bytes = s.as_bytes();
+
+        for (i, &item) in bytes.iter().enumerate() {
+            if item == b' ' {
+                return &s[0..i];
+            }
+        }
+
+        &s[..]
+    }
 
 }

@@ -1,5 +1,5 @@
 use generic_types_trait_and_lifetimes::aggregator::{Summary, Tweet, NewsArticle, notify};
-use generic_types_trait_and_lifetimes::refer::{self, longest};
+use generic_types_trait_and_lifetimes::refer::{self, longest, ImportantExcerpt};
 // use generic_types_trait_and_lifetimes::strager_thinks::{Pa}
 
 /* Without Generic */
@@ -155,6 +155,21 @@ main() {
         println!("'b: {}", outer_result); 
     }
     println!("'a: {}", outer_result); 
+
+
+    // Lifetime annations in stuct definitions
+    let novel: String = String::from("Me chamo XaKira. A alguns ânus atrás ...");
+    let split: Vec<&str> = novel.split('.').collect();
+    let first_sentence : &str = novel.split('.').next().expect("Naum axei essa disgrasa");
+    let important_e: ImportantExcerpt = ImportantExcerpt {
+        part: first_sentence
+    };
+    println!("Vamos ver esse split 01: {}", novel);
+    println!("Vamos ver esse split 02: {}", split[1]);
+    println!("Vamos ver esse lifetime na struct: {}", important_e.part);
+
+    // Lifetime Elision
+    
 
 }
 
