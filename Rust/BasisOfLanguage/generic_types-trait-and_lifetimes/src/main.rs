@@ -169,7 +169,12 @@ main() {
     println!("Vamos ver esse lifetime na struct: {}", important_e.part);
 
     // Lifetime Elision
+
     
+    // Lifetime Annotations in method definitions
+    println!("Test ImportantExcerpt.level(): {}", important_e.level());
+    println!("Test ImportantExcerpt.announce_and_return_part(): {}", important_e.announce_and_return_part("Conquistinha de Ouro"));
+
 
 }
 

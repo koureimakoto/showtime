@@ -162,9 +162,23 @@ pub mod refer {
         pub part: &'a str
     }
 
+    impl<'a> ImportantExcerpt<'a> {
+        pub fn
+        level(&self) -> i32 {
+            3
+        }
+
+        pub fn
+        announce_and_return_part(&self, announcement: &str) -> &str {
+            println!("OH ATENTCAO POHRA {}", announcement);
+            self.part
+        }
+    }
+
+
     pub fn
-    first_word(s: &str) -> &str {
-        let bytes = s.as_bytes();
+    first_word<'a>(s: &'a str) -> &'a str {
+        let bytes: &[u8] = s.as_bytes();
 
         for (i, &item) in bytes.iter().enumerate() {
             if item == b' ' {
