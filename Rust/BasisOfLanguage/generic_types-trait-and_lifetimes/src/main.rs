@@ -1,5 +1,5 @@
 use generic_types_trait_and_lifetimes::aggregator::{Summary, Tweet, NewsArticle, notify};
-use generic_types_trait_and_lifetimes::refer::{self, longest, ImportantExcerpt};
+use generic_types_trait_and_lifetimes::refer::{self, longest, ImportantExcerpt, longest_with_an_announcement};
 // use generic_types_trait_and_lifetimes::strager_thinks::{Pa}
 
 /* Without Generic */
@@ -174,6 +174,10 @@ main() {
     // Lifetime Annotations in method definitions
     println!("Test ImportantExcerpt.level(): {}", important_e.level());
     println!("Test ImportantExcerpt.announce_and_return_part(): {}", important_e.announce_and_return_part("Conquistinha de Ouro"));
+    
+    println!("VALUERA: {}",
+        longest_with_an_announcement("CATACUREMINHAALMA", "LOVVY", important_e.announce_and_return_part("Carinhokinha Rabugentus"))
+    );
 
 
 }
