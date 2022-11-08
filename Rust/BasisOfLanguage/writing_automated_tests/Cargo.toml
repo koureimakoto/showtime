@@ -2,7 +2,13 @@
 name = "writing_automated_tests"
 version = "0.1.0"
 edition = "2021"
+autotests = false
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[[test]]
+name = "integration"
+path = "tests/lib.rs"
+
 
 [dependencies]

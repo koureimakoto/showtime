@@ -1,4 +1,7 @@
-use std::fmt::format;
+
+
+mod madonna;
+
 
 fn
 expo(num: i32) -> i32 {
@@ -48,58 +51,7 @@ Guess {
 
 
 #[cfg(test)]
-mod tests {
-    use crate::Guess;
-    use crate::expo;
-    use crate::Rect;
-    use crate::greeting;
+mod first;
 
-    /*
-     * How to Write Tests
-     */
-    #[test]
-    fn _expo(){
-        let result: i32 = 25;
-        assert_eq!(result, expo(5))
-    }
-
-    // #[test]
-    // fn _force_panic() {
-    //     panic!("Ai ai ai ai ai")
-    // }
-
-    #[test]
-    fn _can_hold_larger() {
-        let larger : Rect = Rect { w: 10, h: 09};
-        let smaller: Rect = Rect { w: 09, h: 08};
-
-        assert!(larger.can_hold(&smaller))
-    }
-
-    #[test]
-    fn _can_hold_smaller() {
-        let larger : Rect = Rect { w: 10, h: 09};
-        let smaller: Rect = Rect { w: 09, h: 08};
-
-        assert!(!smaller.can_hold(&larger));
-    }
-
-    #[test]
-    fn _greeting(){
-        let result: String = greeting("Suvisco");
-        assert!(
-            !result.contains("Suv2isc"),
-            "Vixe não é o seu nome mesmo '{}'",
-            result
-        );
-    }
-
-
-    #[test]
-    #[should_panic]
-    fn _guess__new() {
-        Guess::new(200);
-    }
-
-
-}
+#[cfg(test)]
+mod other;
