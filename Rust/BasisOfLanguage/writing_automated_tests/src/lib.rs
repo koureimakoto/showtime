@@ -1,6 +1,6 @@
 
 
-mod madonna;
+pub mod madonna;
 
 
 fn
