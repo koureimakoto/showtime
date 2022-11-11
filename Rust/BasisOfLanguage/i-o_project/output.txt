@@ -1,0 +1,8 @@
+Case sensitive: false
+Minha busca    : fal
+Em qual arquivo: src/test.txt
+
+[1]: O que falar de Não falar para QuEm falar
+[2]: O que fala, SEm falar Falando 
+[3]: nisso, Aqueles QuE uma veZ falaram
+[4]: não falam mais.

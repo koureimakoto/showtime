@@ -7,7 +7,7 @@ fn main() {
 
     let conf: Config = Config::build(&args).unwrap_or_else(
         |err: &str| {
-            println!("Problema no parsing dos argumentos: {err}");
+            eprintln!("Problema no parsing dos argumentos: {err}");
             exit(1)
         }
     );
@@ -30,7 +30,7 @@ fn main() {
 
     // There is no return value other than Error
     if let Err(e) = run(conf) {
-        println!("Problema no parsing dos argumentos: {e}");
+        eprintln!("Problema no parsing dos argumentos: {e}");
         exit(1)
     }
 
