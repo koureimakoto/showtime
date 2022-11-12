@@ -80,6 +80,15 @@ fn main() {
         println!("V1 ITERATOR: {}", item);
     }
     
+    // -- 
+    let v2: Vec<i32> = vec![1, 3, 5];
+
+    let v3: Vec<_> = v2.iter().map(|x| x + 1 ).collect();
+    
+    for item in v3 {
+        print!("Complicado: {} -> ", item);
+    }
+    println!();
 
 }
 
@@ -106,3 +115,4 @@ fn iterator_sum() {
 
     assert_eq!(total, 6);
 }
+
