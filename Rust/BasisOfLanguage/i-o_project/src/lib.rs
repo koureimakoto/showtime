@@ -17,15 +17,21 @@ impl Config {
      * Build the Config only if args lenght is more than 2
      */
     pub fn
-    build(args: &[String]) -> Result<Config, &'static str> {
-        if args.len() < 3 {
-            return Err("Número insulficiente de argumentos");
-        }
-        
-        let query    : String = args[1].clone();
-        let file_path: String = args[2].clone();
+    build(mut args: impl Iterator<Item = String>) 
+    -> Result<Config, &'static str> {
+        args.next();
 
-        let ignore_case = match env::var("IGNORE_CASE"){
+        let query    : String = match args.next() {
+            Some(arg) => arg,
+            None      => return Err("Não foi possivel obter a Query")
+        };
+
+        let file_path: String = match args.next() {
+            Some(arg) => arg,
+            None      => return Err("Não foi possivel obter o Caminho")
+        };
+
+        let ignore_case = match env::var("IGNORE_CASE") {
             Ok(var)  => if var == "1" { true } else { false },
             Err(_) => false
         };
@@ -94,17 +100,20 @@ run(config: Config) -> Result<(), Box<dyn Error>>{
 // Modify by me and slower :: NEW
 pub fn
 search<'a>(query: &str, contents: &'a str) -> Vec<(usize, &'a str)> {
-    let mut results: Vec<(usize, &str)> = Vec::new();
-    let mut count  : usize = 1;
+     let mut count  : usize = 1;
 
-    for line in contents.lines() {
-        if line.contains(query) {
-            results.push((count, line));
-        }
-        count += 1;
-    }
+    /*
+    The original function of the Rust tutorial use only the sequence 
+    lines => filter => collect, but I needed modify because the function
+    return a tuple (usize, &str) vector.
 
-    results
+    I thought about using a filter_map, but the best choise is below
+    */
+    contents
+        .lines()
+        .filter(|line: &&str| { line.contains(query)      })
+        .map   (|item:  &str| { count += 1; (count, item) })
+        .collect()
 }
 
 pub fn

@@ -3,9 +3,8 @@ use i_o_project::{ Config, run };
 
 
 fn main() {
-    let args: Vec<String> = env::args().collect();
 
-    let conf: Config = Config::build(&args).unwrap_or_else(
+    let conf: Config = Config::build(env::args()).unwrap_or_else(
         |err: &str| {
             eprintln!("Problema no parsing dos argumentos: {err}");
             exit(1)
