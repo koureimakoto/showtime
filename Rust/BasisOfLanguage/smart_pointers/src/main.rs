@@ -1,8 +1,11 @@
+use std::cell::RefCell;
 use std::ops::{Deref, RangeFrom, RangeTo ,Range};
+use std::mem::drop;
+use std::rc::Rc;
 
 enum
-List<T>{ // Como uma estrutura tem o tamanho indefinido
-    Cons(i32, Box<T>),
+List{ // Como uma estrutura tem o tamanho indefinido
+    Cons(i32, Box<List>),
     Nil,
 }
 
@@ -46,7 +49,7 @@ fn main() {
 
     let list = List::Cons(1, Box::new(
         List::Cons(2, Box::new(
-            List::Cons(3, Box::new(0))
+            List::Cons(3, Box::new(List::Nil))
         ))
     ));
 
@@ -69,4 +72,63 @@ fn main() {
     print_hello(&(*name)[RangeTo{ end: 2 }       ]); // RangeTo is equal to (x..)
     print_hello(&(*name)[RangeFrom{ start: 2 }   ]); // RangeFrom is equal to (x..)
 
+
+    // implement drop
+    let c = CustomSmartPointer {
+        data: String::from("my stuff")
+    };
+
+    let d = CustomSmartPointer {
+        data: String::from("other stuff")
+    };
+
+    println!("CSM criado com sucess");
+
+    // std::mem::drop
+
+    let e = CustomSmartPointer {
+        data: String::from("some data")
+    };
+
+    println!("CSM criado com sucesso");
+    drop(e);
+    println!("Ocorreru um drop antes do termino da main");
+
+
+    // RC
+
+    let j = Rc::new(ListRc::Cons(5, Rc::new(ListRc::Cons(10, Rc::new(ListRc::Nil)))));
+    println!("Contagem de ponteiros realocados e sendo utilizados no J = {}", Rc::strong_count(&j));
+    let k = ListRc::Cons(3, Rc::clone(&j));
+    println!("Contagem de ponteiros realocados e sendo utilizados no J = {}", Rc::strong_count(&j));
+    let l = ListRc::Cons(4, Rc::clone(&j));
+    println!("Contagem de ponteiros realocados e sendo utilizados no J = {}", Rc::strong_count(&j));
+    drop(l);
+    println!("Contagem de ponteiros realocados e sendo utilizados no J = {}", Rc::strong_count(&j));
+
+
+
+    // RefCell
+    
+
+
+
+}
+
+enum
+ListRc{ // Como uma estrutura tem o tamanho indefinido
+    Cons(i32, Rc<ListRc>),
+    Nil,
+}
+
+struct
+CustomSmartPointer {
+    data: String
+}
+
+impl
+Drop for CustomSmartPointer {
+    fn drop(&mut self) {
+        println!("Dropping CSP com o dado `{}`!", self.data);
+    }
 }
