@@ -110,13 +110,30 @@ fn main() {
 
     // RefCell
 
+    let val = Rc::new(RefCell::new(5));
+
+    let cl_a = Rc::new(
+        ListRcRef::Cons(Rc::clone(&val), Rc::new(ListRcRef::Nil))
+    );
+
+    let cl_b = ListRcRef::Cons(Rc::new(RefCell::new(4)), Rc::clone(&cl_a));
+    let cl_c = ListRcRef::Cons(Rc::new(RefCell::new(3)), Rc::clone(&cl_a));
     
+    *val.borrow_mut() += 10;
 
 
+    println!("a after = {:?}", cl_a);
+    println!("b after = {:?}", cl_b );
+    println!("c after = {:?}", cl_c);
 
 
+}
 
-
+#[derive(Debug)]
+enum
+ListRcRef{ // Como uma estrutura tem o tamanho indefinido
+    Cons(Rc<RefCell<i32>>, Rc<ListRcRef>),
+    Nil,
 }
 
 enum

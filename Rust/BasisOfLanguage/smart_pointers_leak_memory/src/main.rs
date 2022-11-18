@@ -52,26 +52,26 @@ fn main() {
 
     // Tree
 
-    // let leaf = create_node(3);
-    // let branch = create_node(5);
-    // add_in_branch(&branch, &leaf);
+    let leaf = create_node(3);
+    let branch = create_node(5);
+    add_in_branch(&branch, &leaf);
 
-    // println!("Contagem incial de ponteiros para leaf  : {}", Rc::strong_count(&leaf));
-    // println!("Contagem incial de ponteiros para branch: {}", Rc::strong_count(&branch));
+    println!("Contagem incial de ponteiros para leaf  : {}", Rc::strong_count(&leaf));
+    println!("Contagem incial de ponteiros para branch: {}", Rc::strong_count(&branch));
 
 
-    // let weak_branch = create_weak_node(2);
-    // let weak_leaf = create_weak_node(5);
-    // println!("Contagem incial de ponteiros para leaf  : forte: {}  -  fraco: {}", Rc::strong_count(&weak_leaf), Rc::weak_count(&weak_leaf));
-    // println!("Contagem incial de ponteiros para branch: forte: {}  -  fraco: {}", Rc::strong_count(&weak_branch), Rc::weak_count(&weak_branch));
-    // println!("Pai da folha : {:?}", weak_leaf.parent.borrow().upgrade());
-    // println!("Pai da branch: {:?}", weak_branch.parent.borrow().upgrade());
+    let weak_branch = create_weak_node(2);
+    let weak_leaf = create_weak_node(5);
+    println!("Contagem incial de ponteiros para leaf  : forte: {}  -  fraco: {}", Rc::strong_count(&weak_leaf), Rc::weak_count(&weak_leaf));
+    println!("Contagem incial de ponteiros para branch: forte: {}  -  fraco: {}", Rc::strong_count(&weak_branch), Rc::weak_count(&weak_branch));
+    println!("Pai da folha : {:?}", weak_leaf.parent.borrow().upgrade());
+    println!("Pai da branch: {:?}", weak_branch.parent.borrow().upgrade());
 
-    // add_in_weak_branch(&weak_branch, &weak_leaf);
-    // println!("Contagem incial de ponteiros para weak leaf  : {}", Rc::strong_count(&weak_leaf));
-    // println!("Contagem incial de ponteiros para weak branch: {}", Rc::strong_count(&weak_branch));
-    // println!("Pai da folha : {:?}", weak_leaf.parent.borrow().upgrade());
-    // println!("Pai da branch: {:?}", weak_branch.parent.borrow().upgrade());
+    add_in_weak_branch(&weak_branch, &weak_leaf);
+    println!("Contagem incial de ponteiros para weak leaf  : {}", Rc::strong_count(&weak_leaf));
+    println!("Contagem incial de ponteiros para weak branch: {}", Rc::strong_count(&weak_branch));
+    println!("Pai da folha : {:?}", weak_leaf.parent.borrow().upgrade());
+    println!("Pai da branch: {:?}", weak_branch.parent.borrow().upgrade());
 
 
     println!("\n teste em escopo diferent\n");
