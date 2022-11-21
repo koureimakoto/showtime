@@ -1,4 +1,4 @@
-use oop_features_of_rust_gui::{Screen, Button, Draw};
+use oop_features_of_rust_gui::{Screen, Button, Draw, blog};
 
 struct
 SelectBox {
@@ -9,7 +9,7 @@ SelectBox {
 
 impl Draw for SelectBox {
     fn draw(&self) {
-        todo!()
+        println!("entrou no draw select")
     }
 }
 
@@ -36,7 +36,14 @@ fn main() {
         ]
     };
 
-
     screen.run();
+    
+    // -- Blog
+
+    let mut post = blog::Post::new();
+    post.add_text("Entrei no Koo");
+    let post = post.request_review();
+    let post = post.approve();
+    assert_eq!("Entrei no Koo", post.content());
 
 }
