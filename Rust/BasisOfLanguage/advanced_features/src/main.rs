@@ -1,4 +1,4 @@
-use std::slice;
+use std::{slice, ops::{Add, Sub}, fmt::Display};
 
 
 extern "C"{
@@ -59,15 +59,103 @@ fn main() {
         println!("Valor absolute -3, em C: {}", abs(-3));
     }
 
+    let add_a = Point {x: 5 , y: 2 };
+    let add_b = Point {x: 17, y: 22};
+    let mut add_c = add_a + add_b;
+    println!("{}\n", add_c);
+
+    add_c = add_c - add_a;
+    assert_eq!(add_c, add_b);
+    println!("{}\n", add_c);
+
+
+    println!("Metro (5) + Milimetro (360) : {}", Milimetros(360) + Metros(5));
+
+
 }
+struct Milimetros(u32);
+struct Metros(u32);
+
+impl Add<Metros> for Milimetros {
+    type Output = Milimetros;
+    
+    fn add(self, rhs: Metros) -> Self::Output {
+        const MILIMETRO: u32 = 1000;
+        Milimetros(self.0 + (rhs.0 * MILIMETRO))
+    }
+}
+
+
+impl Display for Milimetros {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{}", self.0)
+    }
+}
+
+
+
+
+trait qualquer<T = Self> {
+    type X;
+}
+
+impl qualquer for Milimetros {
+    type X = Milimetros;
+}
+
+impl qualquer<Metros> for Milimetros {
+    type X = Milimetros;
+}
+
+
+
+
+#[derive(Debug, Clone, Copy, PartialEq)]
+struct
+Point {
+    x: i32, 
+    y: i32
+}
+
+impl Add for Point {
+    type Output = Point;
+
+    fn add(self, rhs: Point) -> Point {
+        Point {
+            x: self.x + rhs.x,
+            y: self.y + rhs.y
+        }
+    }
+
+}
+
+impl Sub for Point {
+    type Output = Point;
+
+    fn sub(self, rhs: Self) -> Self::Output {
+        Point {
+            x: self.x - rhs.x,
+            y: self.y - rhs.y
+        }
+    }
+}
+
+impl Display for Point {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let x_axis = self.x;
+        let y_axis = self.y;
+        write!(f, "({}: {} - {}: {})",
+        stringify!(x_axis), self.x,
+        stringify!(y_axis), self.y)
+    }
+}
+
 
 
 unsafe fn
 dangerous() -> i32 {
     5
 }
-
-
 
 /**
  * Cuidar com essa aplicação de slice.
