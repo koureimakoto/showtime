@@ -1,6 +1,8 @@
 use core::fmt;
 use std::{fmt::Formatter, io::ErrorKind};
 
+
+
 trait Pilot {
     fn fly(&self);
 }
@@ -30,7 +32,10 @@ impl Human {
     }
 }
 
+
+
 fn main() {
+
     let person = Human;
     Pilot::fly(&person);
     Wizard::fly(&person);
