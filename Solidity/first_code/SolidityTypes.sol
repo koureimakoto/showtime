@@ -11,6 +11,11 @@ struct data_test {
     address user;
 }
 
+struct Vec2 {
+    int256 x_axis;
+    int256 y_axis;
+}
+
 contract SolidityTypes {
     // State Variable
     string public hello = "HelloW!";
@@ -33,4 +38,65 @@ contract SolidityTypes {
         "First, Struct",
         0x4B20993Bc481177ec7E8f571ceCaE8A9e22C02db
     );
+
+    // Array
+    uint[]    public my_number_array = [1, 2, 3];
+    string[2] public string_array = ["Makoto", "World"];
+    string[2] public  sized_mutable_string;
+    uint      private size_of_mutable_string = 0;
+
+    string[]  public mutable_string;
+
+
+    // Array with size presetted were cheaper than dynamic array
+    function sized_push(string memory _value) public {
+        if(size_of_mutable_string >= 2) {
+            sized_mutable_string[size_of_mutable_string] = _value;
+            size_of_mutable_string += 1;
+        }
+    }
+
+    // I will avoid, but even so it's sometimes is necessary. 
+    function unsized_push(string memory _value) public {
+        if(mutable_string.length >= 2) {
+            mutable_string.push(_value);
+        }
+    }
+
+
+    // Coord
+    uint256 public hypotenuse = 0;
+
+    function distance(Vec2 memory lhs, Vec2 memory rhs) public {
+        uint256 cathetus_x = uint256(rhs.x_axis - lhs.x_axis);
+        uint256 cathetus_y = uint256(rhs.y_axis - lhs.y_axis);
+
+        if(cathetus_x < cathetus_y) {
+            cathetus_x = cathetus_x ^ cathetus_y;
+            cathetus_y = cathetus_y ^ cathetus_x;
+            cathetus_x = cathetus_x ^ cathetus_y;
+        }
+
+        hypotenuse = cathetus_x + (cathetus_y * cathetus_y / cathetus_x) / 2 ;
+        // hypotenuse = sqrt(cathetus_x**2 + cathetus_y**2);
+    }
+
+    // https://github.com/Uniswap/v2-core/blob/v1.0.1/contracts/libraries/Math.sol
+    function sqrt(uint256 value) internal pure returns (uint256) {
+        if(value < 2) {
+            return value;
+        }
+        
+        uint256 result = value;
+        uint256 buff = (value / 2) + 1;
+
+        while(buff < result) {
+            result = buff;
+            buff   = ((value / buff) + buff) / 2;
+        }
+
+        return result;
+    }
+
+
 }
