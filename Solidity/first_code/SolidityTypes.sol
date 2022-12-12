@@ -99,4 +99,9 @@ contract SolidityTypes {
     }
 
 
+    // Another test using array
+    // Para acesso ao test é semelhante ao passagem de marametro em tuplas no Remix
+    // na orde de um array normal seguidos de outros arrays.
+    uint256[2][2] public array_2d = [[1,2], [3,4]];
+
 }
