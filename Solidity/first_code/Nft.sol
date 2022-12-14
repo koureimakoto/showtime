@@ -35,7 +35,8 @@ struct Raw2DNFT{
 }
 
 struct Collection {
-    string  path;
+    address path;
+    uint256 id_token;
     uint256 payment;
 }
 
@@ -52,11 +53,22 @@ contract TallesNft {
     uint256 private nfts_counter;
 
     mapping(
-        address => mapping(
-            string => Collection[]
-        )
+        address => Collection[]
     ) public owners;
     uint256 private owners_counter;
+
+    address      internal nft_buffer_owner;
+    Collection   internal nft_buffer_node;
+    Collection[] internal nft_collection;
+
+    modifier mustBeCurrentOwner(uint256 _id_token) {
+        address self_owner    = msg.sender;
+        nft_buffer_node = owners[self_owner][_id_token];
+        nft_buffer_owner= nfts[nft_buffer_node.path][nft_buffer_node.id_token].owner;
+
+        require(nft_buffer_owner == self_owner);
+        _;
+    }
 
     function mint(string memory _name, string memory _mime) public {
         nfts[msg.sender].push(Raw2DNFT (
@@ -67,12 +79,19 @@ contract TallesNft {
         ));
     }
 
-    // function transfer(address _to, uint256 nft) public {
+    function transfer(address _to, uint256 _id_token) public
+        mustBeCurrentOwner(_id_token) {
         
-    //     address owner = msg.sender;
-    //     string owner_nft = owner[owner][]
+        require(msg.sender != _to);
 
+        
+        for(uint i = _id_token; i < owners[msg.sender].length - 1; i++) {
+            nft_collection[i] = owners[msg.sender][i + 1];
+        }
 
-    // }
+        owners[msg.sender] = nft_collection;
+        nfts[nft_buffer_node.path][_id_token].owner = _to;
+
+    }
 
 }
