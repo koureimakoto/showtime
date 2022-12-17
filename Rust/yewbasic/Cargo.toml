@@ -1,0 +1,8 @@
+[package]
+name = "yewbasic"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+yew-router = "0.17"
+yew = { version = "0.20.0", features = ["csr"] }
