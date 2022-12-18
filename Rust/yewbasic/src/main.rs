@@ -1,5 +1,5 @@
-use yewbasic::{self, Run};
+use yewbasic::{self, App};
 
 fn main() {
-    yew::Renderer::<Run>::new().render();
+    yew::Renderer::<App>::new().render();
 }
